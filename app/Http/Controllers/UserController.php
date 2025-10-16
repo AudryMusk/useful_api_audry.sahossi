@@ -2,17 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Module;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function showModules()
+    {
+        // $user = User::find(Auth::id());
+        // $modules = $user->modules()->orderBy('id')->where('active', 1)->get();
+
+
+        $user = User::find(Auth::id());
+
+        // $user->modules()->attach($module_ids);
+        $modules = ($user->modules()->orderBy('id')->where('active', 1)->get());
+        return response()->json(
+            $modules
+        );
+    }
+
+    public function activateModule($id)
+    {
+        $user = User::find(Auth::id());
+
+        $module = $user->modules()->attach([$id]);
+
+        return response()->json($module);
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.

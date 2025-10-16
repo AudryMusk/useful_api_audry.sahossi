@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
+use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +16,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
 
     // Protected User API routes
-    Route::get('/modules', [UserController::class, 'index']);
+    Route::get('/modules', [UserController::class, 'showModules']);
+    Route::post('/modules/{id}/activate', [UserController::class, 'activateModule']);
     // Route::get('/users/{id}', [UserController::class, 'show']);
 
     // // Protected Post API routes
