@@ -12,8 +12,8 @@ class Module extends Model
         'description'
     ];
 
-    public function users()
+    public function modules()
     {
-        return $this->belongsToMany(User::class, 'user_modules');
+        return $this->hasMany(UserModule::class, 'module_id');
     }
 }

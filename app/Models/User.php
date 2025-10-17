@@ -49,10 +49,9 @@ class User extends Authenticatable
         ];
     }
 
-    
 
     public function modules()
     {
-        return $this->belongsToMany(Module::class, 'user_modules');
+        return $this->hasMany(UserModule::class, 'user_id');
     }
 }

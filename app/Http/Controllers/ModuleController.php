@@ -21,7 +21,7 @@ class ModuleController extends Controller
         $user = User::find(Auth::id());
         $modules = $user->modules;
         return response()->json(
-            $modules
+            $module
         );
     }
 }

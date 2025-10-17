@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckModuleActive;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,17 +16,9 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    // Protected User API routes
     Route::get('/modules', [UserController::class, 'showModules']);
     Route::post('/modules/{id}/activate', [UserController::class, 'activateModule']);
-    // Route::get('/users/{id}', [UserController::class, 'show']);
-
-    // // Protected Post API routes
-    // Route::get('/posts', [PostController::class, 'index']);
-    // Route::get('/posts/{id}', [PostController::class, 'show']);
-
-    // Logout route
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/modules/{id}/desactivate', [UserController::class, 'desactivateModule']);
 });
 
 Route::get('/user', function (Request $request) {
